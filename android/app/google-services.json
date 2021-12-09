@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1021125536511",
+    "project_id": "ucarakgelsin",
+    "storage_bucket": "ucarakgelsin.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1021125536511:android:ca81d04d7adac698193aca",
+        "android_client_info": {
+          "package_name": "com.example.ucarak_gelsin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1021125536511-m4kugn1ulfc6o3oh2fl572jjmorimthq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_SULH1kNxEftVDZUrYwQjxw-6YM0JY6k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1021125536511-m4kugn1ulfc6o3oh2fl572jjmorimthq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
