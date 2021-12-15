@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:ucarak_gelsin/pages/qrpages/qrgenerate.dart';
+import 'package:ucarak_gelsin/pages/qrpages/qrs.dart';
+import 'package:ucarak_gelsin/pages/qrpages/qrscanner.dart';
 
 class myDrawer extends StatefulWidget {
   const myDrawer({ Key? key }) : super(key: key);
@@ -54,8 +57,17 @@ class _myDrawerState extends State<myDrawer> {
             title: Text('Kuponlarım',style: TextStyle(fontSize: 20),),
             trailing: Icon(Icons.arrow_forward_ios_outlined),
           ),
+          InkWell(
+            onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>Qrs())),
+            child: ListTile(
+              leading: Icon(Icons.qr_code_rounded,size: 30,color: Colors.black,),
+              title: Text('Qr',style: TextStyle(fontSize: 20),),
+              trailing: Icon(Icons.arrow_forward_ios_outlined,color: Colors.green,),
+            ),
+          ),
         ],
       ),
     );
   }
+  
 }

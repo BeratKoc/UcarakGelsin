@@ -9,8 +9,8 @@ class Urun{
   final int? stokAdet;
   
   final bool ?stokDurumu;
-
-    Urun({this.id, this.isim, this.aciklama, this.resimUrl, this.maxAdet, this.stokAdet, this.stokDurumu});
+  final int ?fiyat;
+    Urun({this.id, this.isim, this.aciklama, this.resimUrl, this.maxAdet, this.stokAdet, this.stokDurumu,this.fiyat});
   
   factory Urun.dokumandanUret(DocumentSnapshot doc){
     return Urun(
@@ -22,7 +22,7 @@ class Urun{
       stokAdet: doc.get('stokAdet'),
       
       stokDurumu: doc.get('stokDurumu'),
-
+      fiyat: doc.get('fiyat'),
     );
   }
 

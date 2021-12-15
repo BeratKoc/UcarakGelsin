@@ -192,7 +192,9 @@ class _RestoranSatisState extends State<RestoranSatis> {
                     aitUrunListe[index].maxAdet,
                     aitUrunListe[index].resimUrl,
                     aitUrunListe[index].stokAdet,
-                    aitUrunListe[index].stokDurumu);
+                    aitUrunListe[index].stokDurumu,
+                    aitUrunListe[index].fiyat);
+                    
                 eklenilenUrunler.add(productCard);
                 print(eklenilenUrunler);
                 print("ProductCount.counter" + productCard.counter.toString());

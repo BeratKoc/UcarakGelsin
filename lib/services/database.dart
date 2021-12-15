@@ -1,6 +1,7 @@
 
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:ucarak_gelsin/models/kullanici.dart';
 import 'package:ucarak_gelsin/models/restoran.dart';
 import 'package:ucarak_gelsin/models/urun.dart';
@@ -29,6 +30,7 @@ class DataBase {
   Stream<QuerySnapshot> restoranStoryAkis() {
     return _fb.collection('story').snapshots();
   }
+  
 
   Future<Restoran?> restoranGetir(String id) async {
     DocumentSnapshot doc = await _fb.collection('restoranlar').doc(id).get();
@@ -46,13 +48,7 @@ class DataBase {
     return doc.docs.length;
   }
 
-  Stream<QuerySnapshot> productsAkis(String aktifMagazaId) {
-    return _fb
-        .collection('products')
-        .doc(aktifMagazaId)
-        .collection('owner')
-        .snapshots();
-  }
+  
 /*
   Future<void> productsSepet(
       String aktifMagazaId, String tiklanilanUrununId, int adet) async {
@@ -112,10 +108,12 @@ class DataBase {
   }*/
 
   Future<void> sepetimiAyarla(String aktifKullaniciId, int adet,String satici,String urunId) async {
-    await _fb
+    var x=await _fb
         .collection('sepetim')
         .doc(aktifKullaniciId)
-        .collection('urun').doc().set({
+        .collection('urun').doc(urunId);
+       
+        x.set({
           'adet':adet,
           'urun':urunId,
           'satici':satici,
@@ -126,6 +124,43 @@ class DataBase {
    Stream <QuerySnapshot>sepetAkis(String aktifKullanici){
    return _fb.collection('sepetim').doc(aktifKullanici).collection('urun').snapshots();
    }
+
+
+
+
+   /*Future<QuerySnapshot>sepetQuery(String aktifKullanici)async{
+   
+   QuerySnapshot x=await _fb.collection('sepetim').doc(aktifKullanici).collection('urun').get();
+   
+          
+   var idler=x.docs;
+   List<Future<DocumentSnapshot>> urunDocumentSnapshot= idler.map((e) async => await DataBase().productsDocumentSnapshot(e)).toList();
+   urunDocumentSnapshot.map((e) => Urun.dokumandanUret(e));
+   return x;
+
+   }
+   Future<QuerySnapshot>sepetIds(String aktifKullanici)async{
+    return await _fb.collection('sepetim').doc(aktifKullanici).collection('urun').get();
+   }*/
+
+Future<DocumentSnapshot> productsDocumentSnapshot(doc) async{
+    return await _fb
+        .collection('allproducts').doc(doc).get();
+        
+        
+  }
+Stream<QuerySnapshot> productsAkis(AktifId) {
+    return  _fb
+        .collection('products').doc(AktifId).collection('owner').snapshots();
+        
+        
+  }
+
+
+
+
+
+
 
    Future<DocumentSnapshot> sepeteIsimGetir(String saticiId)async{
      return await FirebaseFirestore.instance.collection('restoranlar').doc(saticiId).get();

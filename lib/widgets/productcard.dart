@@ -11,8 +11,9 @@ class ProductCard extends StatefulWidget {
   String ?fotoUrl;
   int ?stokAdet;
   bool ?stokDurumu;
+  int? fiyat;
   int counter=0;
-  ProductCard(this.id,this.isim,this.aciklama,this.maxAdet,this.fotoUrl,this.stokAdet,this.stokDurumu);
+  ProductCard(this.id,this.isim,this.aciklama,this.maxAdet,this.fotoUrl,this.stokAdet,this.stokDurumu,this.fiyat);
   @override
   _ProductCardState createState() => _ProductCardState();
 }
@@ -25,7 +26,22 @@ class _ProductCardState extends State<ProductCard> {
       width: MediaQuery.of(context).size.width,
       child: ListTile(
         title: Text(widget.isim!),
-        subtitle: Text(widget.aciklama!),
+        subtitle: RichText(
+     text: TextSpan(
+          text: widget.aciklama.toString() + " ",
+          style: TextStyle(fontSize: 13, color: Colors.black),
+          children: <TextSpan>[
+             TextSpan(
+               text: widget.fiyat.toString()+"TL",                                             //Text(widget.aciklama!+" "+widget.fiyat.toString()+"TL"),
+               style: TextStyle(
+                        fontSize: 16,
+                        fontStyle: FontStyle.italic,
+                        fontWeight: FontWeight.bold,
+               ),
+             ),
+          ]
+     ),
+),
         trailing: Image.network(widget.fotoUrl!),
         leading: widget.stokDurumu! ?
       
@@ -127,14 +143,17 @@ class _ProductCardState extends State<ProductCard> {
     )
     :
     
-       Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text("Stok",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black),),
-          Icon(Icons.clear,color: Colors.red,size: 30,),
-        ],
+       Container(
+         width: 90,
+         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            
+            Icon(Icons.clear_outlined,color: Colors.black,size: 30,),
+          ],
       ),
+       ),
     
         
       ),

@@ -3,6 +3,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:ucarak_gelsin/models/kullanici.dart';
+import 'package:ucarak_gelsin/models/restoran.dart';
 import 'package:ucarak_gelsin/models/urun.dart';
 import 'package:ucarak_gelsin/pages/odeme.dart';
 import 'package:ucarak_gelsin/services/authservice.dart';
@@ -31,8 +33,7 @@ class _SepetimState extends State<Sepetim> {
   }
 
   Widget urunKarti() {
-    String? aktifMagazaId = Provider.of<AuthService>(context, listen: false)
-        .aktifTiklanilanmagazaId;
+    //String? aktifMagazaId = Provider.of<AuthService>(context, listen: false).aktifTiklanilanmagazaId;
     String aktifKullanici =
         Provider.of<AuthService>(context, listen: false).aktifKullaniciId!;
 
@@ -40,20 +41,21 @@ class _SepetimState extends State<Sepetim> {
     return StreamBuilder<QuerySnapshot>(
         stream: DataBase().sepetAkis(aktifKullanici),
         builder: (context, snapshot) {
-
+          
           if (snapshot.hasData) {
             
             QuerySnapshot x = snapshot.data!;
-
+            List<QueryDocumentSnapshot> idler=x.docs;
+            
             return ListView.builder(
               shrinkWrap: true,
               itemCount: x.docs.length,
               itemBuilder: (BuildContext context, int index) {
                  if (snapshot.hasData) {
-                  String saticiId = x.docs[index].get('satici');
+                  String? saticiId = x.docs[index].get("satici");
                   String satilanUrunId = x.docs[index].get('urun');
                   String urunId = x.docs[index].id;
-                  print("SaticiId:" + saticiId);
+                  print("SaticiId:" + saticiId!);
                   print("satilanUrunId:" + satilanUrunId);
                   print("UrunId:" + urunId);
 
@@ -225,6 +227,7 @@ class _SepetimState extends State<Sepetim> {
             return Center(child: SizedBox());
           }
         });
+    
   }
 Widget _loadingElements() {
     if (yukleniyor) {

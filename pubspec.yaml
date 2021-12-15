@@ -34,10 +34,21 @@ dependencies:
   cloud_firestore: 
   google_sign_in: ^5.1.1
   provider:
+  
   fluttertoast:
   story_view: 
+  
   flutter_credit_card:   
   flutter_signin_button: ^2.0.0
+  intl_phone_number_input: ^0.7.0+2
+  # scan qr code
+  qr_code_scanner: ^0.6.1
+
+  #generate qr code
+
+  qr_flutter: ^4.0.0
+
+  
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
