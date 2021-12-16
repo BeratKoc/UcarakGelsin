@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class QrScanner extends StatefulWidget {
   const QrScanner({Key? key}) : super(key: key);
@@ -11,6 +12,7 @@ class QrScanner extends StatefulWidget {
 }
 
 class _QrScannerState extends State<QrScanner> {
+ String? _url="https://www.youtube.com/watch?v=T0qbFgbFhg0";
   final qrKey = GlobalKey(debugLabel: 'QR');
   QRViewController? controller;
   Barcode? result;
@@ -55,9 +57,13 @@ class _QrScannerState extends State<QrScanner> {
   void onQRViewCreated(QRViewController controller) {
     this.controller = controller;
     controller.scannedDataStream.listen((scanData) {
+      
       setState(() {
         result = scanData;
+        _url=result!.code;
+        
       });
+      
     });
   }
 
@@ -76,9 +82,21 @@ class _QrScannerState extends State<QrScanner> {
         color: Colors.white24,
         
       ),
-        child: Text(
+        child: Column(
+          children: [
+            Text(
       result != null ? "Result: ${result!.code}" : 'Scan a code',
       style: TextStyle(),
-    ));
+    ),
+    ElevatedButton(onPressed: _launchURL, child: Text('Open In App')),
+          ],
+        ));
   }
+  void _launchURL() async {
+  if (!await launch(
+    _url!,
+    forceWebView: false,
+    enableJavaScript: true,
+  )) throw 'Could not launch $_url';
+}
 }
